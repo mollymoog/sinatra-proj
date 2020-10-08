@@ -1,0 +1,4 @@
+class Geologist < ActiveRecord::Base
+    has_secure_password
+    has_many :rocks
+end
