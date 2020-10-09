@@ -1,14 +1,27 @@
+require './config/environment'
+
 class GeologistController < Sinatra::Base
+    
+    configure do
+        set :public_folder, 'public'
+        set :views, 'app/views'
+      end
 
 #CREATE
     get "/geologists/new" do
+        erb :'/geologists/new'
     end
 
     post "/geologists" do
+
+        erb :"/geologists/index"
     end
 
 #READ
     get "/geologists/:id" do
+    end
+
+    get "/geologists" do
     end
 
 #UPDATE 
@@ -19,7 +32,7 @@ class GeologistController < Sinatra::Base
     end
 
 #DELETE
-    post "/geologists/:id"
+    post "/geologists/:id" do
     end
 
 
