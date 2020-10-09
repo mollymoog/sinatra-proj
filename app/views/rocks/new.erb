@@ -1,0 +1,29 @@
+<h2>Add a New Rock to Your Cave</h2>
+
+<form action="/rocks" method="POST">
+    <label>Rock Type:</label>
+        <input type="text" name="rock_type" id="rock_type">
+    <br><br>
+
+    <lablel>Rock Class:</label>
+    <br>
+        <input type="radio" name="rock_class" value="Igneous" id="igneous_radio">Igneous</input>
+        <input type="radio" name="rock_class" value="Metamorphic" id="metamorphic_radio">Metamorphic</input>
+        <input type="radio" name="rock_class" value="Sedimentary" id="sedimentary_radio">Sedimentary</input>
+    <br><br>
+
+    <label>Location Found:</label>
+        <input type="text" name="location" id="location">
+    <br><br>
+
+    <label>Date Acquired:</label>
+        <input type="datetime-local" name="acquired" id="acquired">
+    <br><br>
+
+    <lable>Weight:</label>
+        <input type="integer" name="weight_g" id="weight_g">
+    <br><br>
+
+    <input type="submit" value="Add to Cave">
+</form>
+    

@@ -1,39 +1,54 @@
 require './config/environment'
 
-class GeologistController < Sinatra::Base
-    
-    configure do
-        set :public_folder, 'public'
-        set :views, 'app/views'
-      end
+class GeologistController < ApplicationController
 
-#CREATE
-    get "/geologists/new" do
-        erb :'/geologists/new'
+    get "/geologists/signup" do 
+        erb :'/geologists/signup'
     end
 
     post "/geologists" do
-
-        erb :"/geologists/index"
+        if params[:username] == "" || params[:password] == ""
+            redirect "/geologists/signup"
+        else 
+            Geologist.create(username: params[:username], password: params[:password])
+            redirect '/geologists/login'
+        end
+        redirect 'geologists/welcome'
     end
 
-#READ
-    get "/geologists/:id" do
+    get "/geologists/login" do
+        erb :'geologists/login'
     end
 
-    get "/geologists" do
+    post "/geologists/login" do
+        @geologist = Geologist.find_by(:username => params[:username])
+
+        if @geologist && @geologist.authenticate(params[:password])
+            session[:user_id] = @geologist.id
+            redirect to '/geologists/home'
+        else
+            redirect '/geologists/welcome'
+        end
     end
 
-#UPDATE 
-    get "/geologists/:id/edit" do
+    get "/geologists/home" do
+        if !logged_in?
+            redirect "/geologists/welcome"
+        else
+            @geologist = Geologist.find(session[:user_id])
+            @rocks = current_geologist.rocks
+
+            erb :'geologists/home'
+        end
     end
 
-    patch "/geologists/:id" do
+    get "/geologists/welcome" do
+        erb :'geologists/failure'
     end
 
-#DELETE
-    post "/geologists/:id" do
+    get "/geologists/logout" do
+        session.clear
+        redirect "/geologists/welcome"
     end
-
 
 end

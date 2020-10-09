@@ -1,0 +1,13 @@
+<h3><%= @geologist.username %>'s Cave</h3>
+
+
+<h2>Click on Your Rock to See More</h2>
+
+<% @rocks.each do |rock| %>
+    
+    <a href="/rocks/<%=rock.id%>"><%= rock.rock_type %> from <%= rock.location %></a>
+<% end %>
+
+<a href="/rocks/new">Add a New Rock</a>
+
+<a href="/geologists/logout">Log Out</a>
