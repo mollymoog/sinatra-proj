@@ -8,3 +8,13 @@
 <br>
 <p><%= @rock.weight_g %>grams</p>
 <br>
+
+<a href="/rocks/<%= @rock.id %>/edit">Edit</a>
+
+<form action="/rocks/<%= @rock.id %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete Rock">
+</form>
+
+
+<a href="/geologists/home">Return to Your Cave</a>

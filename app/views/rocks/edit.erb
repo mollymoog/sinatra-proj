@@ -1,0 +1,29 @@
+<h2>Modify Your Rock</h2>
+
+<form action="/rocks/<%=@rock.id%>" method="POST">
+<input id="hidden" type="hidden" name="_method" value="patch">
+    <label>Rock Type:</label>
+        <input type="text" name="rock[rock_type]" id="rock_type" value="<%= @rock.rock_type %>">
+    <br><br>
+
+    <lablel>Rock Class:</label>
+    <br>
+        <input type="radio" name="rock[rock_class]" value="Igneous" id="igneous_radio" <%='checked' if @rock.rock_class == ("Igneous") %>>Igneous</input>
+        <input type="radio" name="rock[rock_class]" value="Metamorphic" id="metamorphic_radio"<%='checked' if @rock.rock_class == ("Metamorphic") %>>Metamorphic</input>
+        <input type="radio" name="rock[rock_class]" value="Sedimentary" id="sedimentary_radio" <%='checked' if @rock.rock_class == ("Sedimentary") %>>Sedimentary</input>
+    <br><br>
+
+    <label>Location Found:</label>
+        <input type="text" name="rock[location]" id="location" value="<%= @rock.location %>">
+    <br><br>
+
+    <label>Date Acquired:</label>
+        <input type="datetime-local" name="rock[acquired]" id="acquired" value="<%= @rock.acquired %>">
+    <br><br>
+
+    <lable>Weight:</label>
+        <input type="integer" name="rock[weight_g]" id="weight_g" value="<%= @rock.weight_g %>">
+    <br><br>
+
+    <input type="submit" value="Update Rock">
+</form>

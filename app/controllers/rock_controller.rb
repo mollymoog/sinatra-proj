@@ -9,15 +9,33 @@ class RockController < ApplicationController
 
       post "/rocks" do
         binding.pry
-        @rock = current_geologist.rocks.build(params)
+        @rock = current_geologist.rocks.build(params["rock"])
         if @rock.save
           redirect '/geologists/home'
         end
       end
 
       get "/rocks/:id" do
-        @rock = Rock.find_by(params[:id])
+        @rock = Rock.find_by_id(params[:id])
         erb :'rocks/show'
+      end
+
+      get "/rocks/:id/edit" do
+        @rock = Rock.find_by_id(params[:id])
+        erb :'rocks/edit'
+      end
+
+      patch "/rocks/:id" do
+        binding.pry
+        @rock = Rock.find_by_id(params[:id])
+        @rock.update(params["rock"])
+        redirect "rocks/#{@rock.id}"
+      end
+
+      delete "/rocks/:id" do
+        @rock = Rock.find_by_id(params[:id])
+        @rock.destroy
+        redirect "geologists/home"
       end
 
 end
