@@ -7,12 +7,12 @@ class GeologistController < ApplicationController
     end
 
     post "/geologists" do
-        if params[:username] == "" || params[:password] == ""
-            redirect "/geologists/signup"
-        else 
-            Geologist.create(username: params[:username], password: params[:password])
-            redirect '/geologists/login'
-        end
+        @geologist = Geologist.new(username: params[:username], password: params[:password])
+            if @geologist.save
+                redirect '/geologists/login'
+            else
+                erb :'/geologists/signup'
+            end
         redirect 'geologists/welcome'
     end
 
@@ -32,14 +32,12 @@ class GeologistController < ApplicationController
     end
 
     get "/geologists/home" do
-        if !logged_in?
-            redirect "/geologists/welcome"
-        else
-            @geologist = Geologist.find(session[:user_id])
-            @rocks = current_geologist.rocks
+        not_logged_in_redirect
 
-            erb :'geologists/home'
-        end
+        @geologist = Geologist.find(session[:user_id])
+        @rocks = current_geologist.rocks
+
+        erb :'geologists/home'
     end
 
     get "/geologists/welcome" do
